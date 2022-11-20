@@ -18,3 +18,32 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+
+.country-list{    
+  list-style-type: none;
+  margin: 0;
+  margin-left: -40px;  
+  font-size: 20px;
+  font-style: oblique;
+  line-height: 1;
+}
+
+.country-item {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+}
+
+.country-info{
+  width: 30%;
+  margin: 0;
+  padding: 10px;
+  background-color:lightsteelblue;
+  border-radius: 5px;
+  line-height: 1;
+}
+
+#map {
+  height: 180px;
+}
