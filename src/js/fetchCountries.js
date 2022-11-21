@@ -1,25 +1,24 @@
 import Notiflix from 'notiflix';
-import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
 const countryListRef = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
 
 export function fetchCountries(name) {
   fetch(
-    `https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,languages`
+    `https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,languages,area,latlng,capitalInfo`
   )
     .then(response => {
       if (!response.ok) {
-        throw new Error(response.status);
+        throw new Error(response.status)
       }
       console.dir(response);
-      return response.json();
+      return response.json()
     })
     .then(data => {
-      preprocessingData(data);
+      preprocessingData(data)
     })
     .catch(error => {
-      onFetchError(error);
+      onFetchError(error)
     });
 }
 
@@ -41,47 +40,57 @@ function preprocessingData(data) {
       countryListRef.innerHTML += htmlLiElements;
     });
   } else {
-    data.map(iter => {
-      let {
-        name: { official: country },
-        capital,
-        population,
-        flags: { svg: flag },
-        languages: lang,
-      } = iter;
-      let htmlInfo = `<img src="${flag}" alt="Country flag" width="100"><h1>${country}</h1>
-      <p>Capital: ${capital.join(', ')}</p>
-      <p>Population: ${(population / 1000000).toFixed(2)} M people</p>
-      <p>Language(s): ${Object.values(lang).join(', ')}</p>
+    countryInfo.removeAttribute('js-hidden');
+    let {
+      name: { official: country },
+      capital,
+      population,
+      flags: { svg: flag },
+      languages: lang,
+      area,
+      latlng: countryCoordinats,
+      capitalInfo: { latlng: capitalCoordinats },
+    } = iter;
+
+    let htmlInfo = `<img src="${flag}" alt="Country flag" width="100"><h1>${country}</h1>
+      <p class="disc-text">Capital: ${capital.join(', ')}</p>
+      <p class="disc-text">Population: ${(population / 1000000).toFixed(
+        2
+      )} M people</p>
+      <p class="disc-text">Language(s): ${Object.values(lang).join(', ')}</p>
       <div id="map"></div>`;
-      countryInfo.innerHTML += htmlInfo;
-      createMap(country);
-    });
+    countryInfo.innerHTML = htmlInfo;
+
+    createMap(country, capital, area, countryCoordinats, capitalCoordinats);
   }
 }
 
 function onFetchError(error) {
-  // if (error.masaage = "Page Not Found") {
-
-  // }
   countryListRef.innerHTML = '';
   countryInfo.innerHTML = '';
 
   Notiflix.Notify.failure('Oops, there is no country with that name');
-  // const errorT = error.json()
-  console.dir(error);
 }
 
-function createMap(country) {
-  var map = L.map('map').setView([51.505, -0.09], 13);
+function createMap(
+  country,
+  capital,
+  area,
+  countryCoordinats,
+  capitalCoordinats
+) {
+  var map = L.map('map').setView(
+    countryCoordinats,
+    Math.round(-0.74 * Math.log(area) + 13)
+  );
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
 
-  L.marker([51.5, -0.09])
+  L.marker(capitalCoordinats)
     .addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .bindPopup(`Here ${capital}! It is the capital of ${country}!`)
     .openPopup();
 }
