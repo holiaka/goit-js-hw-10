@@ -6,10 +6,10 @@ import Notiflix from 'notiflix';
 
 // Links to HTML elements
 const ref = {
-    countryList: document.querySelector('.country-list'),
-    countryInfo: document.querySelector('.country-info'),
-    input: document.querySelector('#search-box'),
-}
+  countryList: document.querySelector('.country-list'),
+  countryInfo: document.querySelector('.country-info'),
+  input: document.querySelector('#search-box'),
+};
 
 //Hide data about country (-ies)
 showInvitationText();
@@ -32,14 +32,20 @@ function onTypingText(evt) {
         onFetchError(error);
       });
   } else {
-    showInvitationText()
+    showInvitationText();
   }
 }
 
 /*      Support functions list        */
+function hiddenCountryDiscr() {
+  ref.countryList.innerHTML = '';
+  ref.countryInfo.innerHTML = '';
+  ref.countryInfo.setAttribute('js-hidden', '');
+}
+
 function showInvitationText() {
-    hiddenCountryDiscr();
-    Notiflix.Notify.warning('You should type the country name, please !!!');
+  hiddenCountryDiscr();
+  Notiflix.Notify.warning('You should type the country name, please !!!');
 }
 
 function preprocessingData(data) {
@@ -58,7 +64,6 @@ function preprocessingData(data) {
 
 function onFetchError(error) {
   hiddenCountryDiscr();
-
   Notiflix.Notify.failure('Oops, there is no country with that name');
 }
 
