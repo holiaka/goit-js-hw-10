@@ -36,7 +36,7 @@ function onTypingText(evt) {
   }
 }
 
-/*      Support functions list        */
+// Support functions list
 function hiddenCountryDiscr() {
   ref.countryList.innerHTML = '';
   ref.countryInfo.innerHTML = '';
