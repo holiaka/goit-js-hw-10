@@ -22,14 +22,14 @@ ref.input.addEventListener('input', debounce(onTypingText, 300));
 
 // Event listener callback func.
 function onTypingText(evt) {
-  let countryName = evt.target.value.trim();
-  if (countryName.length) {
+  const countryName = evt.target.value.trim();
+  if (countryName.length===true) {
     fetchCountries(countryName)
       .then(data => {
-        return preprocessingData(data);
+        preprocessingData(data);
       })
       .catch(error => {
-        return onFetchError(error);
+        onFetchError(error);
       });
   } else {
     showInvitationText();
