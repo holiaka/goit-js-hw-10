@@ -26,10 +26,10 @@ function onTypingText(evt) {
   if (countryName.length) {
     fetchCountries(countryName)
       .then(data => {
-        preprocessingData(data);
+        return preprocessingData(data);
       })
       .catch(error => {
-        onFetchError(error);
+        return onFetchError(error);
       });
   } else {
     showInvitationText();
