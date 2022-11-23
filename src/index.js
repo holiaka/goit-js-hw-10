@@ -38,12 +38,6 @@ function onTypingText(evt) {
 }
 
 // Support functions list
-function hiddenCountryDiscr() {
-  ref.countryList.innerHTML = '';
-  ref.countryInfo.innerHTML = '';
-  ref.countryInfo.setAttribute('js-hidden', '');
-}
-
 function showInvitationText() {
   hiddenCountryDiscr();
   Notiflix.Notify.warning('You should type the country name, please !!!');
