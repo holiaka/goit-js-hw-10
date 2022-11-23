@@ -75,18 +75,18 @@ function hiddenCountryDiscr() {
 
 function createCountriesList(data) {
   data.map(item => {
-    let {
+    const {
       name: { official: country },
       flags: { svg: flag },
     } = item;
-    let htmlLiElements = `<li class="country-item"><img src="${flag}" alt="Country flag" width="50" height ="25"><p>${country}</p></li>`;
+    const htmlLiElements = `<li class="country-item"><img src="${flag}" alt="Country flag" width="50" height ="25"><p>${country}</p></li>`;
     ref.countryList.innerHTML += htmlLiElements;
   });
 }
 
 function createCountyDiscription(data) {
   ref.countryInfo.removeAttribute('js-hidden');
-  let {
+  const {
     name: { official: country },
     capital,
     population,
@@ -97,7 +97,7 @@ function createCountyDiscription(data) {
     capitalInfo: { latlng: capitalCoordinats },
   } = data[0];
 
-  let htmlInfo = `<img src="${flag}" alt="Country flag" width="100"><h1>${country}</h1>
+  const htmlInfo = `<img src="${flag}" alt="Country flag" width="100"><h1>${country}</h1>
       <p class="disc-text">Capital: ${capital.join(', ')}</p>
       <p class="disc-text">Population: ${(population / 1000000).toFixed(
         2
