@@ -13,6 +13,12 @@ const ref = {
 };
 
 //Hide data about country (-ies)
+function hiddenCountryDiscr() {
+  ref.countryList.innerHTML = '';
+  ref.countryInfo.innerHTML = '';
+  ref.countryInfo.setAttribute('js-hidden', '');
+}
+
 showInvitationText();
 
 // Key var.
@@ -38,11 +44,6 @@ function onTypingText(evt) {
 }
 
 // Support functions list
-function hiddenCountryDiscr() {
-  ref.countryList.innerHTML = '';
-  ref.countryInfo.innerHTML = '';
-  ref.countryInfo.setAttribute('js-hidden', '');
-}
 
 function showInvitationText() {
   hiddenCountryDiscr();
@@ -104,31 +105,31 @@ function createCountyDiscription(data) {
         2
       )} M people</p>
       <p class="disc-text">Language(s): ${Object.values(lang).join(', ')}</p>
-      // <div id="map"></div>`;
+      <div id="map"></div>`;
   ref.countryInfo.innerHTML = htmlInfo;
 
-  // createMap(country, capital, area, countryCoordinats, capitalCoordinats);
+  createMap(country, capital, area, countryCoordinats, capitalCoordinats);
 }
 
-// function createMap(
-//   country,
-//   capital,
-//   area,
-//   countryCoordinats,
-//   capitalCoordinats
-// ) {
-//   var map = L.map('map').setView(
-//     countryCoordinats,
-//     Math.round(-0.74 * Math.log(area) + 14)
-//   );
+function createMap(
+  country,
+  capital,
+  area,
+  countryCoordinats,
+  capitalCoordinats
+) {
+  var map = L.map('map').setView(
+    countryCoordinats,
+    Math.round(-0.74 * Math.log(area) + 14)
+  );
 
-//   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     attribution:
-//       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-//   }).addTo(map);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
 
-//   L.marker(capitalCoordinats)
-//     .addTo(map)
-//     .bindPopup(`Here ${capital}! It is the capital of ${country}!`)
-//     .openPopup();
-// }
+  L.marker(capitalCoordinats)
+    .addTo(map)
+    .bindPopup(`Here ${capital}! It is the capital of ${country}!`)
+    .openPopup();
+}
