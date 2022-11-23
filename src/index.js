@@ -12,7 +12,7 @@ const ref = {
   input: document.querySelector('#search-box'),
 };
 
-//Hide data about country (-ies)
+//Hide data-box about country (-ies)
 hiddenCountryDiscr();
 
 // Key var.
