@@ -13,13 +13,7 @@ const ref = {
 };
 
 //Hide data about country (-ies)
-function hiddenCountryDiscr() {
-  ref.countryList.innerHTML = '';
-  ref.countryInfo.innerHTML = '';
-  ref.countryInfo.setAttribute('js-hidden', '');
-}
-
-showInvitationText();
+hiddenCountryDiscr();
 
 // Key var.
 const DEBOUNCE_DELAY = 300;
@@ -44,6 +38,11 @@ function onTypingText(evt) {
 }
 
 // Support functions list
+function hiddenCountryDiscr() {
+  ref.countryList.innerHTML = '';
+  ref.countryInfo.innerHTML = '';
+  ref.countryInfo.setAttribute('js-hidden', '');
+}
 
 function showInvitationText() {
   hiddenCountryDiscr();
