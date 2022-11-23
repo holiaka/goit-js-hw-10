@@ -23,7 +23,7 @@ ref.input.addEventListener('input', debounce(onTypingText, 300));
 // Event listener callback func.
 function onTypingText(evt) {
   const countryName = evt.target.value.trim();
-  if (countryName.length===true) {
+  if (countryName.length) {
     fetchCountries(countryName)
       .then(data => {
         preprocessingData(data);
