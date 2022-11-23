@@ -87,16 +87,16 @@ function createCountriesList(data) {
 
 function createCountyDiscription(data) {
   ref.countryInfo.removeAttribute('js-hidden');
-  const {
-    name: { official: country },
-    capital,
-    population,
-    flags: { svg: flag },
-    languages: lang,
-    area,
-    latlng: countryCoordinats,
-    capitalInfo: { latlng: capitalCoordinats },
-  } = data[0];
+  // const {
+  //   name: { official: country },
+  //   capital,
+  //   population,
+  //   flags: { svg: flag },
+  //   languages: lang,
+  //   area,
+  //   latlng: countryCoordinats,
+  //   capitalInfo: { latlng: capitalCoordinats },
+  // } = data[0];
 
   const htmlInfo = `<img src="${flag}" alt="Country flag" width="100"><h1>${country}</h1>
       <p class="disc-text">Capital: ${capital.join(', ')}</p>
