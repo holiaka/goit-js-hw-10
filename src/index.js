@@ -87,16 +87,16 @@ function createCountriesList(data) {
 
 function createCountyDiscription(data) {
   ref.countryInfo.removeAttribute('js-hidden');
-  // const {
-  //   name: { official: country },
-  //   capital,
-  //   population,
-  //   flags: { svg: flag },
-  //   languages: lang,
-  //   area,
-  //   latlng: countryCoordinats,
-  //   capitalInfo: { latlng: capitalCoordinats },
-  // } = data[0];
+  const {
+    name: { official: country },
+    capital,
+    population,
+    flags: { svg: flag },
+    languages: lang,
+    area,
+    latlng: countryCoordinats,
+    capitalInfo: { latlng: capitalCoordinats },
+  } = data[0];
 
   const htmlInfo = `<img src="${flag}" alt="Country flag" width="100"><h1>${country}</h1>
       <p class="disc-text">Capital: ${capital.join(', ')}</p>
@@ -104,31 +104,31 @@ function createCountyDiscription(data) {
         2
       )} M people</p>
       <p class="disc-text">Language(s): ${Object.values(lang).join(', ')}</p>
-      <div id="map"></div>`;
+      // <div id="map"></div>`;
   ref.countryInfo.innerHTML = htmlInfo;
 
-  createMap(country, capital, area, countryCoordinats, capitalCoordinats);
+  // createMap(country, capital, area, countryCoordinats, capitalCoordinats);
 }
 
-function createMap(
-  country,
-  capital,
-  area,
-  countryCoordinats,
-  capitalCoordinats
-) {
-  var map = L.map('map').setView(
-    countryCoordinats,
-    Math.round(-0.74 * Math.log(area) + 14)
-  );
+// function createMap(
+//   country,
+//   capital,
+//   area,
+//   countryCoordinats,
+//   capitalCoordinats
+// ) {
+//   var map = L.map('map').setView(
+//     countryCoordinats,
+//     Math.round(-0.74 * Math.log(area) + 14)
+//   );
 
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
+//   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     attribution:
+//       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+//   }).addTo(map);
 
-  L.marker(capitalCoordinats)
-    .addTo(map)
-    .bindPopup(`Here ${capital}! It is the capital of ${country}!`)
-    .openPopup();
-}
+//   L.marker(capitalCoordinats)
+//     .addTo(map)
+//     .bindPopup(`Here ${capital}! It is the capital of ${country}!`)
+//     .openPopup();
+// }
