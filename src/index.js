@@ -1,8 +1,9 @@
-// Libries import
+// Libries and style import
 import './css/styles.css';
 import debounce from 'lodash.debounce';
 import { fetchCountries } from './js/fetchCountries';
 import Notiflix from 'notiflix';
+import L from './../node_modules/leaflet';
 
 // Links to HTML elements
 const ref = {
